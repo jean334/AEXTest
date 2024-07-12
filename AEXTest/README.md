@@ -21,6 +21,7 @@
 - custom kernel based on the 6.9.3, the following paramaters were changed
     - CONFIG_HZ=100 Hz, which means that only 100 temporal interrupts (leading to scheduling, context switching, preemption, etc.) This modification seems to effectively reduce AEX, as the number of AEX was reduced by about half after we change this parameter from 256 to 100.
     - CONFIG_NO_HZ_FULL=y, Omits scheduling-clock ticks on cores that are either idle or that have only one runnable task
+- I've also tried to execute the OS in command-line mode to reduce the number of running processes and try to change the affinity of cores so that they take care of the HW interrupts and other processes (without success).
 
 ## Results
 - **Command :** `./app 2 0 0 0`, 209 AEX counted. Coherent considering 100 scheduling-clock ticks happend every second. Considering the CountAdd_intervals array, this value increments linearly (1 every 10 ms)
